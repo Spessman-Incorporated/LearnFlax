@@ -1,7 +1,7 @@
 {
 	"ID": "fc8ef1bb474956920c5505b7ea7ea9ff",
 	"TypeName": "FlaxEditor.Content.Settings.AudioSettings",
-	"EngineBuild": 6222,
+	"EngineBuild": 6334,
 	"Data": {
 	"DisableAudio": false,
 	"DopplerFactor": 1.0,

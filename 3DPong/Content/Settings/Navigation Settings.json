@@ -1,7 +1,7 @@
 {
 	"ID": "9d5e29604efb16eff6b815aa4a110227",
 	"TypeName": "FlaxEditor.Content.Settings.NavigationSettings",
-	"EngineBuild": 6222,
+	"EngineBuild": 6334,
 	"Data": {
 	"AutoAddMissingNavMeshes": true,
 	"AutoRemoveMissingNavMeshes": true,
@@ -33,7 +33,9 @@
 				"Radius": 34.0,
 				"Height": 144.0,
 				"StepHeight": 35.0,
-				"MaxSlopeAngle": 60.0
+				"MaxSlopeAngle": 60.0,
+				"MaxSpeed": 500.0,
+				"CrowdSeparationWeight": 2.0
 			},
 			"DefaultQueryExtent": {
 				"X": 50.0,

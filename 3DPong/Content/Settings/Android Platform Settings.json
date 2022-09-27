@@ -1,0 +1,10 @@
+{
+	"ID": "08daa0a4019a550d465ccfde89522963",
+	"TypeName": "FlaxEditor.Content.Settings.AndroidPlatformSettings",
+	"EngineBuild": 6334,
+	"Data": {
+	"PackageName": "com.${COMPANY_NAME}.${PROJECT_NAME}",
+	"Permissions": null,
+	"OverrideIcon": null
+}
+}
