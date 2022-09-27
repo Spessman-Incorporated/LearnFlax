@@ -32,20 +32,29 @@ namespace Game.Networking.Core {
         public override void Deinitialize()
         {
             if (_instance == this)
+            {
                 _instance = null;
+            }
+
             base.Deinitialize();
         }
 
         public Player AddPlayer()
         {
-            Player p = new Player() {Id = Guid.NewGuid()};
+            Player p = new Player
+            {
+                Id = Guid.NewGuid()
+            };
             AddPlayer(p);
             return p;
         }
 
         public Player AddPlayer(ref Guid guid, string name)
         {
-            Player p = new Player() {Id = guid, Name = name};
+            Player p = new Player()
+            {
+                Id = guid, Name = name
+            };
             AddPlayer(p);
             return p;
         }
@@ -82,7 +91,10 @@ namespace Game.Networking.Core {
         public Player GetPlayer(Guid guid)
         {
             if (LocalPlayer.Id == guid)
+            {
                 return LocalPlayer;
+            }
+
             foreach (Player t in Players)
             {
                 if (t.Id == guid)

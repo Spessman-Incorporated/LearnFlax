@@ -19,19 +19,25 @@ namespace Game.Networking.Packets
 
         public override void ServerHandler(ref NetworkConnection sender)
         {
-            ConnectionResponsePacket cr = new ConnectionResponsePacket();
-            cr.ID = NetworkSession.Instance.GuidByConn(ref sender);
+            ConnectionResponsePacket cr = new ConnectionResponsePacket
+            {
+                Id = NetworkSession.Instance.GuidByConn(ref sender)
+            };
             NetworkSession.Instance.Send(cr, NetworkChannelType.ReliableOrdered, ref sender);
 
-            GameSession.Instance.GetPlayer(cr.ID).Name = Username;
+            GameSession.Instance.GetPlayer(cr.Id).Name = Username;
 
-            PlayerListPacket plp = new PlayerListPacket();
-            plp.Players = GameSession.Instance.Players;
+            PlayerListPacket plp = new PlayerListPacket
+            {
+                Players = GameSession.Instance.Players
+            };
             NetworkSession.Instance.Send(plp, NetworkChannelType.Reliable, ref sender);
 
-            PlayerConnectedPacket pcp = new PlayerConnectedPacket();
-            pcp.ID = cr.ID;
-            pcp.Username = Username;
+            PlayerConnectedPacket pcp = new PlayerConnectedPacket
+            {
+                Id = cr.Id,
+                Username = Username
+            };
             NetworkSession.Instance.SendAll(pcp, NetworkChannelType.Reliable);
         }
     }

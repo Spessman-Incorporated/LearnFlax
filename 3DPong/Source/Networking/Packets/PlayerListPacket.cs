@@ -12,10 +12,10 @@ namespace Game.Networking.Packets
         public override void Serialize(ref NetworkMessage msg)
         {
             msg.WriteInt32(Players.Count + 1);
-            for (var i = 0; i < Players.Count; i++)
+            foreach (Player t in Players)
             {
-                msg.WriteString(Players[i].Name);
-                msg.WriteGuid(Players[i].Id);
+                msg.WriteString(t.Name);
+                msg.WriteGuid(t.Id);
             }
 
             msg.WriteString(GameSession.Instance.LocalPlayer.Name);
@@ -24,25 +24,27 @@ namespace Game.Networking.Packets
 
         public override void Deserialize(ref NetworkMessage msg)
         {
-            var count = msg.ReadInt32();
+            int count = msg.ReadInt32();
             Players = new List<Player>();
             for (int i = 0; i < count; i++)
             {
-                Player p = new Player();
-                p.Name = msg.ReadString();
-                p.Id = msg.ReadGuid();
+                Player p = new Player
+                {
+                    Name = msg.ReadString(),
+                    Id = msg.ReadGuid()
+                };
                 Players.Add(p);
             }
         }
 
         public override void ClientHandler()
         {
-            for (var i = 0; i < Players.Count; i++)
+            foreach (Player t in Players)
             {
-                if (GameSession.Instance.GetPlayer(Players[i].Id) == null &&
-                    Players[i].Id != GameSession.Instance.LocalPlayer.Id)
+                if (GameSession.Instance.GetPlayer(t.Id) == null &&
+                    t.Id != GameSession.Instance.LocalPlayer.Id)
                 {
-                    GameSession.Instance.AddPlayer(Players[i]);
+                    GameSession.Instance.AddPlayer(t);
                 }
             }
         }

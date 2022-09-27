@@ -3,6 +3,7 @@ using FlaxEngine;
 using FlaxEngine.GUI;
 using FlaxEngine.Networking;
 using Game.Networking.Core;
+using Game.Networking.Demo;
 
 namespace Game.Networking.Chat
 {
@@ -17,10 +18,7 @@ namespace Game.Networking.Chat
         private bool _isWriting;
         private int _chatIndex;
 
-        public bool IsWriting
-        {
-            get => _isWriting;
-        }
+        public bool IsWriting => _isWriting;
 
         /// <inheritdoc/>
         public override void OnEnable()
@@ -45,9 +43,9 @@ namespace Game.Networking.Chat
                 ((VerticalPanel)VertPanel.Control).BackgroundColor = new Color(0, 0, 0, 0.28f);
                 while (_chatIndex < GameSession.Instance.ChatMessages.Count)
                 {
-                    var l = ((VerticalPanel)VertPanel.Control).AddChild<Label>();
-                    var player = GameSession.Instance.GetPlayer(GameSession.Instance.ChatMessages[_chatIndex].Sender);
-                    var name = string.Empty;
+                    Label l = ((VerticalPanel)VertPanel.Control).AddChild<Label>();
+                    Player player = GameSession.Instance.GetPlayer(GameSession.Instance.ChatMessages[_chatIndex].Sender);
+                    string name = string.Empty;
                     if (player != null)
                     {
                         name = player.Name;

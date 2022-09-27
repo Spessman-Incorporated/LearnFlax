@@ -6,24 +6,24 @@ namespace Game.Networking.Packets
 {
     public class PlayerDisconnectedPacket : NetworkPacket
     {
-        public Guid ID;
+        public Guid Id;
 
         public override void Serialize(ref NetworkMessage msg)
         {
-            msg.WriteGuid(ID);
+            msg.WriteGuid(Id);
         }
 
         public override void Deserialize(ref NetworkMessage msg)
         {
-            ID = msg.ReadGuid();
+            Id = msg.ReadGuid();
         }
 
         public override void ClientHandler()
         {
-            if (ID == GameSession.Instance.LocalPlayer.Id)
+            if (Id == GameSession.Instance.LocalPlayer.Id)
                 return;
-            NetworkSession.Instance.RemovePlayer(ref ID);
-            GameSession.Instance.RemovePlayer(ref ID);
+            NetworkSession.Instance.RemovePlayer(ref Id);
+            GameSession.Instance.RemovePlayer(ref Id);
         }
     }
 }

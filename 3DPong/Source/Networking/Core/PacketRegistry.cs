@@ -9,7 +9,7 @@ namespace Game.Networking.Core
 {
     public class PacketRegistry
     {
-        private Dictionary<int, Type> _packets = new Dictionary<int, Type>();
+        private readonly Dictionary<int, Type> _packets = new Dictionary<int, Type>();
 
         public void Register<T>() where T : NetworkPacket
         {
@@ -27,10 +27,9 @@ namespace Game.Networking.Core
                 return;
             }
 
-            var type = _packets[t];
-            var p = (NetworkPacket)Activator.CreateInstance(type);
+            Type type = _packets[t];
+            NetworkPacket p = (NetworkPacket)Activator.CreateInstance(type);
             p.Sender = eventData.Sender;
-            //Debug.Log($"Message Sender={eventData.Sender.ConnectionId} Type={type.Name}");
             p.Deserialize(ref eventData.Message);
             if (isServer)
                 p.ServerHandler(ref eventData.Sender);

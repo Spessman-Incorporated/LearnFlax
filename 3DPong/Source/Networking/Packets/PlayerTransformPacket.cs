@@ -2,6 +2,7 @@
 using FlaxEngine;
 using FlaxEngine.Networking;
 using Game.Networking.Core;
+using Game.Networking.Demo;
 
 namespace Game.Networking.Packets
 {
@@ -25,7 +26,7 @@ namespace Game.Networking.Packets
         public override void ServerHandler(ref NetworkConnection sender)
         {
             Guid guid = NetworkSession.Instance.GuidByConn(ref sender);
-            var player = GameSession.Instance.GetPlayer(guid);
+            Player player = GameSession.Instance.GetPlayer(guid);
             player.Position = Position;
             player.Rotation = Rotation;
         }

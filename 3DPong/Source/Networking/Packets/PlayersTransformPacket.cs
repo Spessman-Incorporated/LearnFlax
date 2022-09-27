@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FlaxEngine;
 using FlaxEngine.Networking;
 using Game.Networking.Core;
+using Game.Networking.Demo;
 
 namespace Game.Networking.Packets
 {
@@ -15,12 +16,12 @@ namespace Game.Networking.Packets
             public Quaternion Rotation;
         }
 
-        public List<TransformEntry> Transforms = new List<TransformEntry>();
+        public readonly List<TransformEntry> Transforms = new List<TransformEntry>();
 
         public override void Serialize(ref NetworkMessage msg)
         {
             msg.WriteInt32(Transforms.Count);
-            for (var i = 0; i < Transforms.Count; i++)
+            for (int i = 0; i < Transforms.Count; i++)
             {
                 msg.WriteGuid(Transforms[i].Guid);
                 msg.WriteVector3(Transforms[i].Position);
@@ -44,11 +45,11 @@ namespace Game.Networking.Packets
 
         public override void ClientHandler()
         {
-            for (var i = 0; i < Transforms.Count; i++)
+            for (int i = 0; i < Transforms.Count; i++)
             {
                 if (GameSession.Instance.LocalPlayer.Id == Transforms[i].Guid)
                     continue;
-                var player = GameSession.Instance.GetPlayer(Transforms[i].Guid);
+                Player player = GameSession.Instance.GetPlayer(Transforms[i].Guid);
                 player.Position = Transforms[i].Position;
                 player.Rotation = Transforms[i].Rotation;
             }

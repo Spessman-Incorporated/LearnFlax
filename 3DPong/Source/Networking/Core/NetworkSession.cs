@@ -1,6 +1,7 @@
 ﻿using System;
 using FlaxEngine;
 using FlaxEngine.Networking;
+using Game.Networking.Chat;
 using Game.Networking.Demo;
 using Game.Networking.Packets;
 
@@ -240,7 +241,7 @@ namespace Game.Networking.Core
                 return;
             PlayerDisconnectedPacket pdp = new PlayerDisconnectedPacket
             {
-                ID = guid
+                Id = guid
             };
             SendAll(pdp, NetworkChannelType.ReliableOrdered);
             _peer.Disconnect(_connRegistry.ConnByGuid(ref guid));
